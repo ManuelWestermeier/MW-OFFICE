@@ -43,6 +43,8 @@ function HandleKeys(e) {
             keys = {}
         } else if (keys.g) {
             AddGrid()
+        }else if (keys.d) {
+            Download()
         }
 
     }
