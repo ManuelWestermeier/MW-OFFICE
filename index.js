@@ -43,8 +43,11 @@ function HandleKeys(e) {
             keys = {}
         } else if (keys.g) {
             AddGrid()
-        }else if (keys.d) {
+        } else if (keys.d) {
             Download()
+        }
+        else if (keys.l) {
+            exe('insertUnorderedList')
         }
 
     }
