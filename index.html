@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MW-OFFICE</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+
+        <button onclick="exe('undo')">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z" />
+            </svg>
+        </button>
+        <button onclick="exe('redo')">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M396-200q-97 0-166.5-63T160-420q0-94 69.5-157T396-640h252L544-744l56-56 200 200-200 200-56-56 104-104H396q-63 0-109.5 40T240-420q0 60 46.5 100T396-280h284v80H396Z" />
+            </svg>
+        </button>
+        <button onclick="Download()">
+            Download
+        </button>
+        <button onclick="exe('bold')">
+            <b>Aaa</b>
+        </button>
+        <button onclick="exe('italic')">
+            <i>Aaa</i>
+        </button>
+        <button onclick="exe('underline')">
+            <u>Aaa</u>
+        </button>
+        <button onclick="exe('createLink',false,prompt('url :')+' ')">
+            Link
+        </button>
+        <button onclick="exe('fontSize',false,parseInt(prompt('headline type : 1 - 7')??2))">
+            Font Size
+        </button>
+        <button onclick="InsetImage()">
+            Insert Image
+        </button>
+        <button onclick="AddGrid()">
+            Grid
+        </button>
+
+    </header>
+    <main id="content" contenteditable>
+    </main>
+
+</body>
+
+</html>
