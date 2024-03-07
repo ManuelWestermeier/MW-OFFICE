@@ -69,7 +69,7 @@ function AddGrid() {
 
 async function Download() {
     const name = prompt("filename :")
-    var frame = prompt("use frame? (y/n)") == "y"
+    var frame = true
     var data;
 
     if (frame) {
