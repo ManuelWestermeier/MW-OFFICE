@@ -254,6 +254,7 @@ img {
     animation: _img 0.5s ease-in-out;
     transition: none;
     max-height: 60dvh;
+    max-width: 100%;
 }
 
 @keyframes _img {
