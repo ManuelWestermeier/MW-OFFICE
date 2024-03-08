@@ -64,6 +64,8 @@ function HandleKeys(e) {
         else if (keys.I) {
             InsetImage()
             keys = {}
+        } else if (keys.E) {
+            Share()
         }
 
     }
@@ -90,10 +92,7 @@ function AddGrid() {
 
 async function Download() {
     const name = prompt("filename :")
-    var data = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${name}</title><style>${(await (await fetch("index.css")).text()).split("\n").join(" ")}img:active {position: fixed;z-index: 1001;top: 0;left: 0;max-height: none;width:100dvw;height: 100dvh;object-fit: contain;background-color: var(--d);}</style></head><body><main id="content">${ct.innerHTML}</main><script>var l=document.createElement("link");document.head.appendChild(l);l.rel="icon";l.href=document.querySelector("img")?.src</script></body></html>`
-
-    const blob = new Blob([data], { type: "text/html" })
-    const downloadURL = URL.createObjectURL(blob)
+    const downloadURL = URL.createObjectURL(await getDownloadBlob(name))
 
     const link = document.createElement("a")
 
@@ -102,6 +101,21 @@ async function Download() {
     link.click()
     keys = {}
 
+}
+
+async function getDownloadBlob(name = "") {
+    var data = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${name}</title><style>${(await (await fetch("index.css")).text()).split("\n").join(" ")}img:active {position: fixed;z-index: 1001;top: 0;left: 0;max-height: none;width:100dvw;height: 100dvh;object-fit: contain;background-color: var(--d);}</style></head><body><main id="content">${ct.innerHTML}</main><script>var l=document.createElement("link");document.head.appendChild(l);l.rel="icon";l.href=document.querySelector("img")?.src</script></body></html>`
+
+    const blob = new Blob([data], { type: "text/html" })
+
+    return blob;
+}
+
+async function Share() {
+    const name = prompt("filename :") + ".html"
+    const blob = await getDownloadBlob(name)
+    navigator.share({ files: [new File([blob], name, { type: "text/html" })], title: "MW-Office Document" })
+    keys = {}
 }
 
 function InsetImage() {
