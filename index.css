@@ -13,6 +13,7 @@
     outline: none;
     transition: all 0.2s ease-in-out;
     word-break: break-all;
+    fill: var(--d);
 }
 
 html {
@@ -72,6 +73,7 @@ header {
     box-shadow: 0 0 7px -2px var(--d);
     animation: start-in 1s ease-in-out;
     transform-origin: 0;
+    z-index: 10000;
 }
 
 header button {

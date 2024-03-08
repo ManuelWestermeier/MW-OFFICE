@@ -176,3 +176,14 @@ function ChangePage() {
     ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
     keys = {}
 }
+
+function toggleDesign() {
+    var theme = localStorage.getItem("theme") == "dark" ? "light" : "dark"
+    localStorage.setItem("theme", theme)
+    document.documentElement.style.setProperty('--l', theme == "dark" ? "rgb(17, 17, 17)" : "rgb(238, 238, 238)");
+    document.documentElement.style.setProperty('--d', theme == "dark" ? "rgb(238, 238, 238)" : "rgb(17, 17, 17)");
+    document.documentElement.style.setProperty('--p', theme == "dark" ? "rgb(15, 15, 15)" : "rgb(215, 215, 215)");
+}
+
+toggleDesign()
+toggleDesign()
