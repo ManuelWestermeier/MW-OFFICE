@@ -121,6 +121,7 @@ async function Share() {
 function InsetImage() {
     const input = document.createElement("input")
     input.type = "file"
+    input.accept = "image/*"
 
     input.addEventListener("change", e => {
         const file = e.target.files[0]
