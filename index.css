@@ -19,6 +19,7 @@ html {
     scroll-behavior: smooth;
     color: var(--d);
     background-color: var(--l);
+    overflow-x: hidden;
 }
 
 a {
@@ -61,12 +62,22 @@ header {
     display: flex;
     align-items: center;
     width: 100dvw;
+    height: 50px;
     position: sticky;
     top: 0;
     left: 0;
+    overflow-y: hidden;
     overflow-x: auto;
     background-color: var(--l);
     box-shadow: 0 0 7px -2px var(--d);
+    animation: start-in 1s ease-in-out;
+    transform-origin: 0;
+}
+
+@keyframes start-in {
+    from {
+        transform: scaleX(0);
+    }
 }
 
 main {
@@ -78,6 +89,8 @@ main {
     color: var(--d);
     background-color: var(--l);
     overflow: hidden;
+    transform-origin: 0;
+    animation: start-in 1s ease-in-out;
 }
 
 main:focus {
@@ -214,8 +227,22 @@ main:focus {
     }
 
     main {
+        width: 100%;
         box-shadow: none;
         margin: 0;
         padding: 0;
+    }
+}
+
+img {
+    cursor: pointer;
+    animation: _img 0.5s ease-in-out;
+    transition: none;
+    max-height: 60dvh;
+}
+
+@keyframes _img {
+    from {
+        opacity: 0.5;
     }
 }

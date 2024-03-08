@@ -24,9 +24,18 @@ function HandleKeys(e) {
 
     log(keys)
 
+    if (keys.Tab) {
+        e.preventDefault()
+        exe("insertHTML", false, '\t\t\t\t')
+    }
+
+    if (keys.Control && keys.s)
+        e.preventDefault()
+
     if (keys.Escape) {
 
         e.preventDefault()
+        ct.focus()
 
         if (keys.ArrowRight) {
             exe("redo")
@@ -46,8 +55,15 @@ function HandleKeys(e) {
         } else if (keys.d) {
             Download()
         }
-        else if (keys.l) {
+        else if (keys.L) {
             exe('insertUnorderedList')
+        }
+        else if (keys.l) {
+            exe('insertOrderedList')
+        }
+        else if (keys.I) {
+            InsetImage()
+            keys = {}
         }
 
     }
@@ -74,16 +90,7 @@ function AddGrid() {
 
 async function Download() {
     const name = prompt("filename :")
-    var frame = true
-    var data;
-
-    if (frame) {
-        data = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${name}</title><style>
-        ${(await (await fetch("index.css")).text()).split("\n").join(" ")}</style></head><body><main id="content">${ct.innerHTML}</main></body></html>`
-    } else {
-        data = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${name}</title><style>
-        ${(await (await fetch("index.css")).text()).split("\n").join(" ")}</style></head><body id="content">${ct.innerHTML}</body></html>`
-    }
+    var data = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${name}</title><style>${(await (await fetch("index.css")).text()).split("\n").join(" ")}img:active {position: fixed;z-index: 1001;top: 0;left: 0;max-height: none;width:100dvw;height: 100dvh;object-fit: contain;background-color: var(--d);}</style></head><body><main id="content">${ct.innerHTML}</main><script>var l=document.createElement("link");document.head.appendChild(l);l.rel="icon";l.href=document.querySelector("img")?.src</script></body></html>`
 
     const blob = new Blob([data], { type: "text/html" })
     const downloadURL = URL.createObjectURL(blob)
@@ -93,6 +100,7 @@ async function Download() {
     link.download = name + ".html"
     link.href = downloadURL
     link.click()
+    keys = {}
 
 }
 
