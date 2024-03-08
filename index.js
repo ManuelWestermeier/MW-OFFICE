@@ -22,8 +22,6 @@ window.addEventListener("keyup", ({ key }) => {
 
 function HandleKeys(e) {
 
-    log(keys)
-
     if (keys.Tab) {
         e.preventDefault()
         exe("insertHTML", false, '\t\t\t\t')
@@ -66,6 +64,12 @@ function HandleKeys(e) {
             keys = {}
         } else if (keys.E) {
             Share()
+        } else if (keys[","]) {
+            exe('justifyLeft')
+        } else if (keys["."]) {
+            exe('justifyCenter')
+        } else if (keys["-"]) {
+            exe('justifyRight')
         }
 
     }
@@ -144,3 +148,15 @@ ct.addEventListener("click", e => {
         }
     }
 })
+
+const isLink = () => {
+    if (window.getSelection().toString !== '') {
+        const selection = window.getSelection().getRangeAt(0)
+        if (selection) {
+            if (selection.startContainer.parentNode.tagName === 'A'
+                || selection.endContainer.parentNode.tagName === 'A') {
+                return [true, selection]
+            } else { return false }
+        } else { return false }
+    }
+}
