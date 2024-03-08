@@ -74,6 +74,21 @@ header {
     transform-origin: 0;
 }
 
+header button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+}
+
+header button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px -3px var(--a);
+    border: 2px solid var(--d);
+}
+
 @keyframes start-in {
     from {
         transform: scaleX(0);
@@ -245,4 +260,8 @@ img {
     from {
         opacity: 0.5;
     }
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
