@@ -136,3 +136,11 @@ function InsetImage() {
 
     input.click()
 }
+
+ct.addEventListener("click", e => {
+    if (e.target.href) {
+        if (keys.Control || keys.Escape || keys.Alt) {
+            open(e.target.href)
+        }
+    }
+})
