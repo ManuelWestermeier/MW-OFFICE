@@ -266,3 +266,8 @@ img {
 ::-webkit-scrollbar {
     display: none;
 }
+
+::selection{
+    color: var(--l);
+    background-color: var(--a);
+}

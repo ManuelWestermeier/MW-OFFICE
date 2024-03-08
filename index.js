@@ -7,6 +7,8 @@ window.addEventListener("blur", e => ct.focus())
 
 ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
 
+window.addEventListener("hashchange", e => ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>")
+
 ct.addEventListener("input", e => {
     localStorage.setItem(location.hash, ct.innerHTML);
 })
@@ -70,6 +72,8 @@ function HandleKeys(e) {
             exe('justifyCenter')
         } else if (keys["-"]) {
             exe('justifyRight')
+        } else if (keys["#"]) {
+            ChangePage()
         }
 
     }
@@ -138,6 +142,8 @@ function InsetImage() {
         fr.readAsDataURL(file)
     })
 
+    keys = {}
+
     input.click()
 }
 
@@ -159,4 +165,14 @@ const isLink = () => {
             } else { return false }
         } else { return false }
     }
+}
+
+function ChangePage() {
+    keys = {}
+    const strorageArray = Object.keys(localStorage).filter(k => k[0] == "#")
+    const projects = strorageArray.map((k, i) => `(${i + 1}) ${k}`)
+    var p = prompt(`goto projeckt : (1 - ${projects.length}) or new project name\n${projects.join("\n")}`)
+    document.location.hash = strorageArray?.[parseInt(p || strorageArray.findIndex(document.location.hash) + 1) - 1] || p
+    ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
+    keys = {}
 }
