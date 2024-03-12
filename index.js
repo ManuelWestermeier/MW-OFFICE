@@ -19,17 +19,6 @@ class DomObject {
 
     }
 
-    removeListeners() {
-        /*e.target.classList.add("fade-out")
-        setTimeout(() => {
-            e.target.parentElement.removeChild(e.target)
-        }, 300)*/
-        this.node.removeEventListener("contextmenu")
-        this.node.removeEventListener("mousedown")
-        this.node.removeEventListener("mousemove")
-        this.node.removeEventListener("mouseup")
-    }
-
 }
 
 function draggable(el) {
@@ -53,12 +42,22 @@ function draggable(el) {
     });
 }
 
-
 window.addEventListener("blur", e => ct.focus())
 
 ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
 
-ct.childNodes.forEach(n => new DomObject(n))
+function Update() {
+    ct.childNodes.forEach(n => {
+        n.removeEventListener("contextmenu", null)
+        n.removeEventListener("mousedown", null)
+        n.removeEventListener("mousemove", null)
+        n.removeEventListener("mouseup", null)
+        new DomObject(n)
+    })
+    requestAnimationFrame(Update)
+}
+
+Update()
 
 window.addEventListener("hashchange", e => ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>")
 
@@ -131,24 +130,6 @@ function HandleKeys(e) {
 
     }
 
-}
-
-function AddGrid() {
-    const [width, height] = prompt("Grid size : width/height").split("/").map(x => parseInt(x));
-
-    exe(
-        "insertHTML",
-        false,
-        `<div class="grid" style="grid-template-columns: repeat(${width}, 1fr); grid-template-rows: repeat(${height}, 1fr);">
-            ${Array.from(new Uint8Array(width * height)).map((x, i) =>
-            `<div class="g-w-5">
-                element ${i + 1}
-            </div>`
-        ).join("")}
-        </div>`
-    )
-
-    keys = {}
 }
 
 async function Download() {
@@ -240,3 +221,7 @@ function toggleDesign() {
 
 toggleDesign()
 toggleDesign()
+
+function AddTextField() {
+    document.execCommand('insertHTML', false, '<textarea placeholder="Text..."></textarea>')
+}
