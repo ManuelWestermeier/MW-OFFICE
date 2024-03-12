@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "worder",
+    "short_name": "worder",
+    "description": "The Next Wrod",
+    "background_color": "rgb(238, 238, 238)",
+    "theme_color": "rgb(238, 238, 238)",
+    "orientation": "portrait",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "logo.jpg",
+            "sizes": "256x256",
+            "purpose": "maskable"
+        }
+    ]
+}
