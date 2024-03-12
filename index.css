@@ -269,7 +269,30 @@ img {
     display: none;
 }
 
-::selection{
+::selection {
     color: var(--l);
     background-color: var(--a);
+}
+
+
+
+.obj {
+    position: absolute;
+    overflow: hidden;
+    transition: none;
+}
+
+.obj:active {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: grab;
+}
+
+.fade-out {
+    transition: all 0.3s ease-in-out !important;
+    opacity: 0 !important;
 }

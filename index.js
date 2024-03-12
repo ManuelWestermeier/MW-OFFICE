@@ -3,9 +3,62 @@ const ct = document.querySelector("main")
 const log = console.log
 var keys = {}
 
+class DomObject {
+
+    constructor(node = Node) {
+
+        if (!("classList" in node)) return
+        this.node = node
+        this.node.classList.add("obj")
+
+        this.node.addEventListener("contextmenu", e => {
+            //e.preventDefault()
+        })
+
+        draggable(this.node)
+
+    }
+
+    removeListeners() {
+        /*e.target.classList.add("fade-out")
+        setTimeout(() => {
+            e.target.parentElement.removeChild(e.target)
+        }, 300)*/
+        this.node.removeEventListener("contextmenu")
+        this.node.removeEventListener("mousedown")
+        this.node.removeEventListener("mousemove")
+        this.node.removeEventListener("mouseup")
+    }
+
+}
+
+function draggable(el) {
+    el.addEventListener('mousedown', function (e) {
+        var offsetX = e.clientX - parseInt(window.getComputedStyle(this).left);
+        var offsetY = e.clientY - parseInt(window.getComputedStyle(this).top);
+
+        function mouseMoveHandler(e) {
+            el.style.top = (e.clientY - offsetY) + 'px';
+            el.style.left = (e.clientX - offsetX) + 'px';
+            localStorage.setItem(location.hash, ct.innerHTML);
+        }
+
+        function reset() {
+            window.removeEventListener('mousemove', mouseMoveHandler);
+            window.removeEventListener('mouseup', reset);
+        }
+
+        window.addEventListener('mousemove', mouseMoveHandler);
+        window.addEventListener('mouseup', reset);
+    });
+}
+
+
 window.addEventListener("blur", e => ct.focus())
 
 ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
+
+ct.childNodes.forEach(n => new DomObject(n))
 
 window.addEventListener("hashchange", e => ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>")
 
