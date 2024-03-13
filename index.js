@@ -180,6 +180,6 @@ function toggleDesign() {
 toggleDesign()
 toggleDesign()
 
-function AddTextField() {
+function AddDragableField() {
     document.execCommand('insertHTML', false, '<section class="dragable" draggable="true">Dragzone</section>')
 }
