@@ -3,66 +3,24 @@ const ct = document.querySelector("main")
 const log = console.log
 var keys = {}
 
-class DomObject {
-
-    constructor(node = Node) {
-
-        if (!("classList" in node)) return
-        this.node = node
-        this.node.classList.add("obj")
-
-        this.node.addEventListener("contextmenu", e => {
-            //e.preventDefault()
-        })
-
-        draggable(this.node)
-
-    }
-
-}
-
-function draggable(el) {
-    el.addEventListener('mousedown', function (e) {
-        var offsetX = e.clientX - parseInt(window.getComputedStyle(this).left);
-        var offsetY = e.clientY - parseInt(window.getComputedStyle(this).top);
-
-        function mouseMoveHandler(e) {
-            el.style.top = (e.clientY - offsetY) + 'px';
-            el.style.left = (e.clientX - offsetX) + 'px';
-            localStorage.setItem(location.hash, ct.innerHTML);
-        }
-
-        function reset() {
-            window.removeEventListener('mousemove', mouseMoveHandler);
-            window.removeEventListener('mouseup', reset);
-        }
-
-        window.addEventListener('mousemove', mouseMoveHandler);
-        window.addEventListener('mouseup', reset);
-    });
-}
-
 window.addEventListener("blur", e => ct.focus())
 
 ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>"
-
-function Update() {
-    ct.childNodes.forEach(n => {
-        n.removeEventListener("contextmenu", null)
-        n.removeEventListener("mousedown", null)
-        n.removeEventListener("mousemove", null)
-        n.removeEventListener("mouseup", null)
-        new DomObject(n)
-    })
-    requestAnimationFrame(Update)
-}
-
-Update()
 
 window.addEventListener("hashchange", e => ct.innerHTML = localStorage.getItem(location.hash) || "<h1>New Document</h1>")
 
 ct.addEventListener("input", e => {
     localStorage.setItem(location.hash, ct.innerHTML);
+})
+
+window.addEventListener("mousemove", e => {
+    if (e.target) {
+        if (e.target.classList.contains("dragable")) {
+            if (e.buttons == 1) {
+                
+            }
+        }
+    }
 })
 
 window.addEventListener("keydown", (e) => {
@@ -223,5 +181,5 @@ toggleDesign()
 toggleDesign()
 
 function AddTextField() {
-    document.execCommand('insertHTML', false, '<textarea placeholder="Text..."></textarea>')
+    document.execCommand('insertHTML', false, '<section class="dragable" draggable="true">Dragzone</section>')
 }

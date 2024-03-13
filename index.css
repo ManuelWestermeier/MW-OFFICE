@@ -163,30 +163,17 @@ img {
     background-color: var(--a);
 }
 
-.obj {
+.dragable {
+    position: relative;
+}
+
+.dragable:hover::after {
+    content: "move";
     position: absolute;
-    transition: none;
-    background-color: transparent;
-}
-
-.obj:active {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    top: -20px;
+    left: -20px;
     cursor: grab;
-}
-
-.fade-out {
-    transition: all 0.3s ease-in-out !important;
-    opacity: 0 !important;
-}
-
-textarea {
-    border: none;
-    resize: none;
-    background-color: transparent;
-    box-shadow: none;
+    background-color: var(--p);
+    padding: 5px;
+    border-radius: 5px;
 }
